@@ -3,32 +3,18 @@
 
 import { useState } from 'react'
 
-type Task = {
+export type Task = {
   id: number
   title: string
   done: boolean
 }
 
-const INITIAL_TASKS: Task[] = [
-  {
-    id: 1,
-    title: 'HTTP / 쿠키 / 캐싱 Day1~5 내용 가볍게 복습',
-    done: false,
-  },
-  {
-    id: 2,
-    title: 'Next.js 프로젝트 구조 한 번 훑어보기',
-    done: false,
-  },
-  {
-    id: 3,
-    title: 'CSR 컴포넌트 코드 읽으면서 동작 이미지로 그려보기',
-    done: false,
-  },
-]
+type CsrTaskListProps = {
+  initialTasks: Task[]
+}
 
-export function CsrTaskList() {
-  const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS)
+export function CsrTaskList({ initialTasks }: CsrTaskListProps) {
+  const [tasks, setTasks] = useState<Task[]>(initialTasks)
   const [newTitle, setNewTitle] = useState('')
 
   const toggleTask = (id: number) => {
