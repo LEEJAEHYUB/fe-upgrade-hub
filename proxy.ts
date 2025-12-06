@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 // 예: 유지보수 모드 on/off 플래그
-const MAINTENANCE_MODE = false;
+const MAINTENANCE_MODE = true;
 
 export function middleware(req: NextRequest) {
     const pathname = req.nextUrl.pathname;
