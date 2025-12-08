@@ -2,9 +2,9 @@
 import type { Metadata } from 'next';
 
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 async function getPost(slug: string) {
@@ -16,7 +16,8 @@ async function getPost(slug: string) {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const post = await getPost(params.slug);
+  const { slug } = await params;
+  const post = await getPost(slug);
 
   if (!post) {
     return {
@@ -31,9 +32,10 @@ export async function generateMetadata({
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
+  const { slug } = await params;
   return (
     <main className="p-8">
-      <h1 className="text-2xl font-bold">블로그 글: {params.slug}</h1>
+      <h1 className="text-2xl font-bold">블로그 글: {slug}</h1>
       <p>이 페이지는 slug 기반 Dynamic Metadata를 사용합니다.</p>
     </main>
   );
